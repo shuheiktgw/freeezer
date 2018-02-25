@@ -1,8 +1,7 @@
-# Freeezer
+# freeezer
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/freeezer`. To experiment with that code, run `bin/console` for an interactive prompt.
+fre"e"ezer is a gem which provides a `deep_freeze` method for Hash and Array object. 
 
-TODO: Delete this and the text above, and describe your gem
 
 ## Installation
 
@@ -21,9 +20,33 @@ Or install it yourself as:
     $ gem install freeezer
 
 ## Usage
+All you need to do is just to call `using Freeezer` and you can use `deep_freeeze` method for Hash and Array object.
 
-TODO: Write usage instructions here
+```ruby
+using Freeezer
+  
+HASH_CONST = { first: 'one', second: 'two' }.deep_freeze
+HASH_CONST.all?{|_key, value| value.frozen? } # => true
 
+ARRAY_CONST = ['first', 'second', 'third'].deep_freeze
+ARRAY_CONST.all?{|value| value.frozen? } # => true
+```
+
+Of course you can call `using Freeezer` inside a class.
+
+```ruby
+class TestClass
+  using Freeezer
+  
+  HASH_CONST = { first: 'one', second: 'two' }.deep_freeze
+  ARRAY_CONST = ['first', 'second', 'third'].deep_freeze
+end
+
+TestClass::HASH_CONST.all?{|_key, value| value.frozen? } # => true
+TestClass::ARRAY_CONST.all?{|value| value.frozen? } # => true
+```
+
+Also, it will freeze Hash, or Array even if it is nested. Please be aware that the name is not `freezer` but `freeezer`.
 ## Development
 
 After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
@@ -32,7 +55,7 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/freeezer. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
+Bug reports and pull requests are welcome on GitHub at https://github.com/shuheiktgw/freeezer. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
 
 ## License
 
